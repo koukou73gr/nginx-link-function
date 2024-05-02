@@ -39,6 +39,7 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <sys/socket.h>
 
 #define ngx_link_func_module_version_34 34
 
@@ -105,6 +106,7 @@ extern void ngx_link_func_log_err(ngx_link_func_ctx_t *ctx, const char* msg);
 extern int ngx_link_func_get_uri(ngx_link_func_ctx_t *ctx, ngx_link_func_str_t *str);
 extern u_char* ngx_link_func_get_header(ngx_link_func_ctx_t *ctx, const char *key, size_t keylen);
 extern u_char* ngx_link_func_get_prop(ngx_link_func_ctx_t *ctx, const char *key, size_t keylen);
+extern struct sockaddr* ngx_link_func_get_connection_info(ngx_link_func_ctx_t *ctx);
 extern void* ngx_link_func_get_query_param(ngx_link_func_ctx_t *ctx, const char *key);
 extern void* ngx_link_func_palloc(ngx_link_func_ctx_t *ctx, size_t size);
 extern void* ngx_link_func_pcalloc(ngx_link_func_ctx_t *ctx, size_t size);

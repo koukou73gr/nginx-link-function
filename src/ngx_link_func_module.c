@@ -219,6 +219,7 @@ char *ngx_link_func_strdup(ngx_link_func_ctx_t *ctx, const char *src);
 int ngx_link_func_get_uri(ngx_link_func_ctx_t *ctx, ngx_link_func_str_t *str);
 u_char* ngx_link_func_get_header(ngx_link_func_ctx_t *ctx, const char *key, size_t keylen);
 u_char* ngx_link_func_get_prop(ngx_link_func_ctx_t *ctx, const char *key, size_t keylen);
+struct sockaddr *ngx_link_func_get_connection_info(ngx_link_func_ctx_t *ctx);
 int ngx_link_func_add_header_in(ngx_link_func_ctx_t *ctx, const char *key, size_t keylen, const char *value, size_t val_len );
 int ngx_link_func_add_header_out(ngx_link_func_ctx_t *ctx, const char *key, size_t keylen, const char *value, size_t val_len );
 void* ngx_link_func_get_query_param(ngx_link_func_ctx_t *ctx, const char *key);
@@ -1870,6 +1871,12 @@ ngx_http_link_func_strdup_with_p(ngx_pool_t *pool, const char *src, size_t len) 
     }
     ngx_memcpy(dst, src, len);
     return dst;
+}
+
+struct sockaddr*
+ngx_link_func_get_connection_info(ngx_link_func_ctx_t *ctx) {
+    ngx_http_request_t *r = (ngx_http_request_t*)ctx->__r__;
+    return r->connection->sockaddr;
 }
 
 u_char*
